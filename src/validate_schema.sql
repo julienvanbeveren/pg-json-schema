@@ -26,6 +26,18 @@ BEGIN
       END IF;
     END IF;
 
+    IF schema->>'exclusiveMinimum' IS NOT NULL THEN
+      IF data::NUMERIC <= (schema->>'exclusiveMinimum')::NUMERIC THEN
+        RETURN FALSE;
+      END IF;
+    END IF;
+
+    IF schema->>'exclusiveMaximum' IS NOT NULL THEN
+      IF data::NUMERIC >= (schema->>'exclusiveMaximum')::NUMERIC THEN
+        RETURN FALSE;
+      END IF;
+    END IF;
+
   END IF;
 
   RETURN TRUE;

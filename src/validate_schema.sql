@@ -29,6 +29,5 @@ BEGIN
   END IF;
 
   RETURN TRUE;
-
 END;
 $$ LANGUAGE plpgsql;

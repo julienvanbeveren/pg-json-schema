@@ -1,6 +1,7 @@
 
 import pytest
 import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_READ_COMMITTED, ISOLATION_LEVEL_SERIALIZABLE
 import json
 import os
 
@@ -11,6 +12,7 @@ def db_conn():
         pytest.fail("DATABASE_URL environment variable is not set.")
 
     conn = psycopg2.connect(database_url)
+    conn.set_isolation_level(ISOLATION_LEVEL_READ_COMMITTED)
     try:
         yield conn
     finally:

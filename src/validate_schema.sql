@@ -5,21 +5,31 @@ DECLARE
   _key TEXT;
   _value TEXT;
   _required TEXT[];
+  _required_item TEXT;
 BEGIN
 
   IF schema->>'type' = 'object' THEN
-    SELECT COALESCE((schema->'required')::TEXT[], '{}') INTO _required;
-    FOR _key, _value IN
-      SELECT * FROM jsonb_each_text(data->'properties')
-    LOOP
-      IF _key = ANY(_required) AND NOT data ? _key THEN
-        RETURN FALSE;
-      END IF;
-      IF NOT validate_schema(data->_key, schema->'properties'->_key) THEN
-        RETURN FALSE;
-      END IF;
-    END LOOP;
   END IF;
+
+  SELECT array_agg(value) INTO _required
+  FROM jsonb_array_elements_text((SELECT schema->'required')) AS value;
+
+  FOR _key, _value IN
+    SELECT * FROM jsonb_each_text(data->'properties')
+  LOOP
+    IF _key = ANY(_required) AND NOT data ? _key THEN
+      RETURN FALSE;
+    END IF;
+    IF NOT validate_schema(data->_key, schema->'properties'->_key) THEN
+      RETURN FALSE;
+    END IF;
+  END LOOP;
+  FOREACH _required_item IN ARRAY _required
+  LOOP
+    IF NOT data ? _required_item THEN
+      RETURN FALSE;
+    END IF;
+  END LOOP;
 
   -- null validation
   IF schema->>'type' = 'null' THEN
@@ -108,6 +118,7 @@ BEGIN
 
   EXCEPTION
     WHEN OTHERS THEN
+      RAISE NOTICE 'An error occurred: %, SQLSTATE: %', SQLERRM, SQLSTATE;
       RETURN FALSE;
 END;
 $$ LANGUAGE plpgsql;

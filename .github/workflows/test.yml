@@ -42,7 +42,7 @@ jobs:
       env:
         DATABASE_URL: postgres://postgres:admin@localhost:5432/db
       run: make test
-      continue_on_error: true
+      continue-on-error: true
 
     - name: Generate and upload CI badges
       uses: gaelgirodon/ci-badges-action@v1

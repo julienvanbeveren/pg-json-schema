@@ -2,7 +2,24 @@ CREATE OR REPLACE FUNCTION validate_schema(data jsonb, schema jsonb)
 RETURNS BOOLEAN AS $$
 DECLARE
   path TEXT[] DEFAULT '{}';
+  _key TEXT;
+  _value TEXT;
+  _required TEXT[];
 BEGIN
+
+  IF schema->>'type' = 'object' THEN
+    SELECT COALESCE((schema->'required')::TEXT[], '{}') INTO _required;
+    FOR _key, _value IN
+      SELECT * FROM jsonb_each_text(data->'properties')
+    LOOP
+      IF _key = ANY(_required) AND NOT data ? _key THEN
+        RETURN FALSE;
+      END IF;
+      IF NOT validate_schema(data->_key, schema->'properties'->_key) THEN
+        RETURN FALSE;
+      END IF;
+    END LOOP;
+  END IF;
 
   -- null validation
   IF schema->>'type' = 'null' THEN

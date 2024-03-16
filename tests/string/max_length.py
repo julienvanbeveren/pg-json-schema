@@ -46,7 +46,7 @@ def test_valid_same_as_max(db_conn):
 
     with db_conn.cursor() as cur:
         cur.execute(
-            "SELECT validate_schema(%s::jsonb, %s::jsonb) AS is_valid;",
+            "SELECT validate_schema(%s, %s::jsonb) AS is_valid;",
             (data_str, schema_str)
         )
         result = cur.fetchone()[0]
@@ -58,7 +58,7 @@ def test_invalid(db_conn):
     valid_data = "hello world"
     schema = {
         "type": "string",
-        "maxLengt": 5
+        "maxLength": 5
     }
 
     data_str = json.dumps(valid_data)

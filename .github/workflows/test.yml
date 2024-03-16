@@ -44,6 +44,12 @@ jobs:
       run: make test
       continue-on-error: true
 
+    - name: Upload JUnit XML report as an artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: JUnit Report
+        path: report.xml
+
     - name: Generate and upload CI badges
       uses: gaelgirodon/ci-badges-action@v1
       with:

@@ -44,14 +44,21 @@ jobs:
       run: make test
       continue-on-error: true
 
-    - name: Upload JUnit XML report as an artifact
-      uses: actions/upload-artifact@v4
+    - name: Upload report.json to Gist
+      uses: actions/github-script@v6
       with:
-        name: JUnit Report
-        path: report.xml
-
-    - name: Generate and upload CI badges
-      uses: gaelgirodon/ci-badges-action@v1
-      with:
-        gist-id: 070e58d1fbee37dab44796ed36c141bc
-        token: ${{ secrets.GIST_TOKEN }}
+        github-token: ${{secrets.GIST_TOKEN}}
+        script: |
+          const fs = require('fs');
+          const gistId = '070e58d1fbee37dab44796ed36c141bc';
+          const fileName = './report.json';
+          const fileContent = fs.readFileSync(fileName, {encoding: 'utf8'});
+          
+          await github.rest.gists.update({
+            gist_id: gistId,
+            files: {
+              "report.json": {
+                content: fileContent
+              }
+            }
+          });

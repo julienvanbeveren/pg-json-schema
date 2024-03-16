@@ -19,19 +19,9 @@ def db_conn():
 
 def test_first_anyOf_valid(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -45,19 +35,9 @@ def test_first_anyOf_valid(db_conn):
         
 def test_second_anyOf_valid(db_conn):
     data = 2.5
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -71,19 +51,9 @@ def test_second_anyOf_valid(db_conn):
         
 def test_both_anyOf_valid(db_conn):
     data = 3
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -97,19 +67,9 @@ def test_both_anyOf_valid(db_conn):
         
 def test_neither_anyOf_valid(db_conn):
     data = 1.5
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -123,20 +83,9 @@ def test_neither_anyOf_valid(db_conn):
         
 def test_mismatch_base_schema(db_conn):
     data = 3
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "string",
-    "anyOf": [
-        {
-            "maxLength": 2
-        },
-        {
-            "minLength": 4
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'string', 'anyOf': [{'maxLength': 2}, {'minLength': 4}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -150,20 +99,9 @@ def test_mismatch_base_schema(db_conn):
         
 def test_one_anyOf_valid(db_conn):
     data = 'foobar'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "string",
-    "anyOf": [
-        {
-            "maxLength": 2
-        },
-        {
-            "minLength": 4
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'string', 'anyOf': [{'maxLength': 2}, {'minLength': 4}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -177,20 +115,9 @@ def test_one_anyOf_valid(db_conn):
         
 def test_both_anyOf_invalid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "string",
-    "anyOf": [
-        {
-            "maxLength": 2
-        },
-        {
-            "minLength": 4
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'string', 'anyOf': [{'maxLength': 2}, {'minLength': 4}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -204,15 +131,9 @@ def test_both_anyOf_invalid(db_conn):
         
 def test_any_value_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        true,
-        true
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [True, True]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -226,15 +147,9 @@ def test_any_value_is_valid(db_conn):
         
 def test_any_value_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        true,
-        false
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [True, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -248,15 +163,9 @@ def test_any_value_is_valid(db_conn):
         
 def test_any_value_is_invalid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        false,
-        false
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [False, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -269,34 +178,10 @@ def test_any_value_is_invalid(db_conn):
     assert result is False, "anyOfwithbooleanschemasallfalse"
         
 def test_first_anyOf_valid_complex(db_conn):
-    data = {"bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -309,34 +194,10 @@ def test_first_anyOf_valid_complex(db_conn):
     assert result is True, "anyOfcomplextypes"
         
 def test_second_anyOf_valid_complex(db_conn):
-    data = {"foo": "baz"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 'baz'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -349,34 +210,10 @@ def test_second_anyOf_valid_complex(db_conn):
     assert result is True, "anyOfcomplextypes"
         
 def test_both_anyOf_valid_complex(db_conn):
-    data = {"foo": "baz", "bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 'baz', 'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -389,34 +226,10 @@ def test_both_anyOf_valid_complex(db_conn):
     assert result is True, "anyOfcomplextypes"
         
 def test_neither_anyOf_valid_complex(db_conn):
-    data = {"foo": 2, "bar": "quux"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 2, 'bar': 'quux'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -430,17 +243,9 @@ def test_neither_anyOf_valid_complex(db_conn):
         
 def test_string_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "type": "number"
-        },
-        {}
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'type': 'number'}, {}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -454,17 +259,9 @@ def test_string_is_valid(db_conn):
         
 def test_number_is_valid(db_conn):
     data = 123
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "type": "number"
-        },
-        {}
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'type': 'number'}, {}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -478,20 +275,9 @@ def test_number_is_valid(db_conn):
         
 def test_null_is_valid(db_conn):
     data = null
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "anyOf": [
-                {
-                    "type": "null"
-                }
-            ]
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'anyOf': [{'type': 'null'}]}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -505,20 +291,9 @@ def test_null_is_valid(db_conn):
         
 def test_anything_nonnull_is_invalid(db_conn):
     data = 123
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "anyOf": [
-        {
-            "anyOf": [
-                {
-                    "type": "null"
-                }
-            ]
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'anyOf': [{'type': 'null'}]}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

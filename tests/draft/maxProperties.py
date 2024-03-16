@@ -18,13 +18,10 @@ def db_conn():
 
 
 def test_shorter_is_valid(db_conn):
-    data = {"foo": 1}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2
-}
+    data = {'foo': 1}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -37,13 +34,10 @@ def test_shorter_is_valid(db_conn):
     assert result is True, "maxPropertiesvalidation"
         
 def test_exact_length_is_valid(db_conn):
-    data = {"foo": 1, "bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2
-}
+    data = {'foo': 1, 'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -56,13 +50,10 @@ def test_exact_length_is_valid(db_conn):
     assert result is True, "maxPropertiesvalidation"
         
 def test_too_long_is_invalid(db_conn):
-    data = {"foo": 1, "bar": 2, "baz": 3}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2
-}
+    data = {'foo': 1, 'bar': 2, 'baz': 3}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -76,12 +67,9 @@ def test_too_long_is_invalid(db_conn):
         
 def test_ignores_arrays(db_conn):
     data = [1, 2, 3]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -95,12 +83,9 @@ def test_ignores_arrays(db_conn):
         
 def test_ignores_strings(db_conn):
     data = 'foobar'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -114,12 +99,9 @@ def test_ignores_strings(db_conn):
         
 def test_ignores_other_nonobjects(db_conn):
     data = 12
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -132,13 +114,10 @@ def test_ignores_other_nonobjects(db_conn):
     assert result is True, "maxPropertiesvalidation"
         
 def test_shorter_is_valid(db_conn):
-    data = {"foo": 1}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2.0
-}
+    data = {'foo': 1}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2.0}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -151,13 +130,10 @@ def test_shorter_is_valid(db_conn):
     assert result is True, "maxPropertiesvalidationwithadecimal"
         
 def test_too_long_is_invalid(db_conn):
-    data = {"foo": 1, "bar": 2, "baz": 3}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 2.0
-}
+    data = {'foo': 1, 'bar': 2, 'baz': 3}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 2.0}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -171,12 +147,9 @@ def test_too_long_is_invalid(db_conn):
         
 def test_no_properties_is_valid(db_conn):
     data = {}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 0
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 0}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -189,13 +162,10 @@ def test_no_properties_is_valid(db_conn):
     assert result is True, "maxProperties0meanstheobjectisempty"
         
 def test_one_property_is_invalid(db_conn):
-    data = {"foo": 1}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "maxProperties": 0
-}
+    data = {'foo': 1}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'maxProperties': 0}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

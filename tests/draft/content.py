@@ -19,12 +19,9 @@ def db_conn():
 
 def test_a_valid_JSON_document(db_conn):
     data = '{"foo": "bar"}'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -38,12 +35,9 @@ def test_a_valid_JSON_document(db_conn):
         
 def test_an_invalid_JSON_document_validates_true(db_conn):
     data = '{:}'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -57,12 +51,9 @@ def test_an_invalid_JSON_document_validates_true(db_conn):
         
 def test_ignores_nonstrings(db_conn):
     data = 100
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -76,12 +67,9 @@ def test_ignores_nonstrings(db_conn):
         
 def test_a_valid_base64_string(db_conn):
     data = 'eyJmb28iOiAiYmFyIn0K'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentEncoding": "base64"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentEncoding': 'base64'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -95,12 +83,9 @@ def test_a_valid_base64_string(db_conn):
         
 def test_an_invalid_base64_string__is_not_a_valid_character_validates_true(db_conn):
     data = 'eyJmb28iOi%iYmFyIn0K'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentEncoding": "base64"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentEncoding': 'base64'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -114,12 +99,9 @@ def test_an_invalid_base64_string__is_not_a_valid_character_validates_true(db_co
         
 def test_ignores_nonstrings(db_conn):
     data = 100
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentEncoding": "base64"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentEncoding': 'base64'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -133,13 +115,9 @@ def test_ignores_nonstrings(db_conn):
         
 def test_a_valid_base64encoded_JSON_document(db_conn):
     data = 'eyJmb28iOiAiYmFyIn0K'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -153,13 +131,9 @@ def test_a_valid_base64encoded_JSON_document(db_conn):
         
 def test_a_validlyencoded_invalid_JSON_document_validates_true(db_conn):
     data = 'ezp9Cg=='
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -173,13 +147,9 @@ def test_a_validlyencoded_invalid_JSON_document_validates_true(db_conn):
         
 def test_an_invalid_base64_string_that_is_valid_JSON_validates_true(db_conn):
     data = '{}'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -193,13 +163,9 @@ def test_an_invalid_base64_string_that_is_valid_JSON_validates_true(db_conn):
         
 def test_ignores_nonstrings(db_conn):
     data = 100
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -213,24 +179,9 @@ def test_ignores_nonstrings(db_conn):
         
 def test_a_valid_base64encoded_JSON_document(db_conn):
     data = 'eyJmb28iOiAiYmFyIn0K'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -244,24 +195,9 @@ def test_a_valid_base64encoded_JSON_document(db_conn):
         
 def test_another_valid_base64encoded_JSON_document(db_conn):
     data = 'eyJib28iOiAyMCwgImZvbyI6ICJiYXoifQ=='
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -275,24 +211,9 @@ def test_another_valid_base64encoded_JSON_document(db_conn):
         
 def test_an_invalid_base64encoded_JSON_document_validates_true(db_conn):
     data = 'eyJib28iOiAyMH0='
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -306,24 +227,9 @@ def test_an_invalid_base64encoded_JSON_document_validates_true(db_conn):
         
 def test_an_empty_object_as_a_base64encoded_JSON_document_validates_true(db_conn):
     data = 'e30='
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -337,24 +243,9 @@ def test_an_empty_object_as_a_base64encoded_JSON_document_validates_true(db_conn
         
 def test_an_empty_array_as_a_base64encoded_JSON_document(db_conn):
     data = 'W10='
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -368,24 +259,9 @@ def test_an_empty_array_as_a_base64encoded_JSON_document(db_conn):
         
 def test_a_validlyencoded_invalid_JSON_document_validates_true(db_conn):
     data = 'ezp9Cg=='
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -399,24 +275,9 @@ def test_a_validlyencoded_invalid_JSON_document_validates_true(db_conn):
         
 def test_an_invalid_base64_string_that_is_valid_JSON_validates_true(db_conn):
     data = '{}'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -430,24 +291,9 @@ def test_an_invalid_base64_string_that_is_valid_JSON_validates_true(db_conn):
         
 def test_ignores_nonstrings(db_conn):
     data = 100
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "contentMediaType": "application/json",
-    "contentEncoding": "base64",
-    "contentSchema": {
-        "type": "object",
-        "required": [
-            "foo"
-        ],
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'contentMediaType': 'application/json', 'contentEncoding': 'base64', 'contentSchema': {'type': 'object', 'required': ['foo'], 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

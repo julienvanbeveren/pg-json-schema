@@ -18,13 +18,10 @@ def db_conn():
 
 
 def test_valid_definition_schema(db_conn):
-    data = {"$defs": {"foo": {"type": "integer"}}}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$ref": "https://json-schema.org/draft/2020-12/schema"
-}
+    data = {'$defs': {'foo': {'type': 'integer'}}}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', '$ref': 'https://json-schema.org/draft/2020-12/schema'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -37,13 +34,10 @@ def test_valid_definition_schema(db_conn):
     assert result is True, "validatedefinitionagainstmetaschema"
         
 def test_invalid_definition_schema(db_conn):
-    data = {"$defs": {"foo": {"type": 1}}}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$ref": "https://json-schema.org/draft/2020-12/schema"
-}
+    data = {'$defs': {'foo': {'type': 1}}}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', '$ref': 'https://json-schema.org/draft/2020-12/schema'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

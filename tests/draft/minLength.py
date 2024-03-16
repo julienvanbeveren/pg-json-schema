@@ -19,12 +19,9 @@ def db_conn():
 
 def test_longer_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "minLength": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'minLength': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -38,12 +35,9 @@ def test_longer_is_valid(db_conn):
         
 def test_exact_length_is_valid(db_conn):
     data = 'fo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "minLength": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'minLength': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -57,12 +51,9 @@ def test_exact_length_is_valid(db_conn):
         
 def test_too_short_is_invalid(db_conn):
     data = 'f'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "minLength": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'minLength': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -76,12 +67,9 @@ def test_too_short_is_invalid(db_conn):
         
 def test_ignores_nonstrings(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "minLength": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'minLength': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -95,12 +83,9 @@ def test_ignores_nonstrings(db_conn):
         
 def test_one_grapheme_is_not_long_enough(db_conn):
     data = '💩'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "minLength": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'minLength': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -114,12 +99,9 @@ def test_one_grapheme_is_not_long_enough(db_conn):
         
 def test_longer_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "minLength": 2.0
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'minLength': 2.0}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -133,12 +115,9 @@ def test_longer_is_valid(db_conn):
         
 def test_too_short_is_invalid(db_conn):
     data = 'f'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "minLength": 2.0
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'minLength': 2.0}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

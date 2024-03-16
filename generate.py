@@ -38,7 +38,7 @@ def db_conn():
             json_data = json.load(json_file)
 
         for suite in json_data:
-            schema = json.dumps(suite["schema"], indent=4)
+            schema = suite["schema"]
             for test in suite["tests"]:
                 description_sanitized = "_".join(test["description"].split(" "))
                 description_sanitized = re.sub(r'[^0-9a-zA-Z_]', '', description_sanitized)  # Remove special characters
@@ -48,14 +48,14 @@ def db_conn():
                 if isinstance(test["data"], str):
                     data_repr = f"'{test['data']}'"  # Preserve it as a Python string
                 else:
-                    data_repr = json.dumps(test["data"])  # Convert other types to JSON string
+                    data_repr = test["data"] or json.dumps(test["data"])  # Convert other types to JSON string
 
                 new_file_content += f"""
 def test_{description_sanitized}(db_conn):
     data = {data_repr}
     schema = {schema}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

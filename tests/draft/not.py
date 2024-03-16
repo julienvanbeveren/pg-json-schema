@@ -19,14 +19,9 @@ def db_conn():
 
 def test_allowed(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": "integer"
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': 'integer'}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -40,14 +35,9 @@ def test_allowed(db_conn):
         
 def test_disallowed(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": "integer"
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': 'integer'}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -61,17 +51,9 @@ def test_disallowed(db_conn):
         
 def test_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": [
-            "integer",
-            "boolean"
-        ]
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': ['integer', 'boolean']}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -85,17 +67,9 @@ def test_valid(db_conn):
         
 def test_mismatch(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": [
-            "integer",
-            "boolean"
-        ]
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': ['integer', 'boolean']}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -108,18 +82,10 @@ def test_mismatch(db_conn):
     assert result is False, "notmultipletypes"
         
 def test_other_mismatch(db_conn):
-    data = true
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": [
-            "integer",
-            "boolean"
-        ]
-    }
-}
+    data = True
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': ['integer', 'boolean']}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -133,19 +99,9 @@ def test_other_mismatch(db_conn):
         
 def test_match(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": "object",
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': 'object', 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -158,20 +114,10 @@ def test_match(db_conn):
     assert result is True, "notmorecomplexschema"
         
 def test_other_match(db_conn):
-    data = {"foo": 1}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": "object",
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    data = {'foo': 1}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': 'object', 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -184,20 +130,10 @@ def test_other_match(db_conn):
     assert result is True, "notmorecomplexschema"
         
 def test_mismatch(db_conn):
-    data = {"foo": "bar"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "type": "object",
-        "properties": {
-            "foo": {
-                "type": "string"
-            }
-        }
-    }
-}
+    data = {'foo': 'bar'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'type': 'object', 'properties': {'foo': {'type': 'string'}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -210,17 +146,10 @@ def test_mismatch(db_conn):
     assert result is False, "notmorecomplexschema"
         
 def test_property_present(db_conn):
-    data = {"foo": 1, "bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "properties": {
-        "foo": {
-            "not": {}
-        }
-    }
-}
+    data = {'foo': 1, 'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'properties': {'foo': {'not': {}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -233,17 +162,10 @@ def test_property_present(db_conn):
     assert result is False, "forbiddenproperty"
         
 def test_property_absent(db_conn):
-    data = {"bar": 1, "baz": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "properties": {
-        "foo": {
-            "not": {}
-        }
-    }
-}
+    data = {'bar': 1, 'baz': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'properties': {'foo': {'not': {}}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -257,12 +179,9 @@ def test_property_absent(db_conn):
         
 def test_number_is_invalid(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -276,12 +195,9 @@ def test_number_is_invalid(db_conn):
         
 def test_string_is_invalid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -294,13 +210,10 @@ def test_string_is_invalid(db_conn):
     assert result is False, "forbideverythingwithemptyschema"
         
 def test_boolean_true_is_invalid(db_conn):
-    data = true
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    data = True
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -314,12 +227,9 @@ def test_boolean_true_is_invalid(db_conn):
         
 def test_boolean_false_is_invalid(db_conn):
     data = false
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -333,12 +243,9 @@ def test_boolean_false_is_invalid(db_conn):
         
 def test_null_is_invalid(db_conn):
     data = null
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -351,13 +258,10 @@ def test_null_is_invalid(db_conn):
     assert result is False, "forbideverythingwithemptyschema"
         
 def test_object_is_invalid(db_conn):
-    data = {"foo": "bar"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    data = {'foo': 'bar'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -371,12 +275,9 @@ def test_object_is_invalid(db_conn):
         
 def test_empty_object_is_invalid(db_conn):
     data = {}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -389,13 +290,10 @@ def test_empty_object_is_invalid(db_conn):
     assert result is False, "forbideverythingwithemptyschema"
         
 def test_array_is_invalid(db_conn):
-    data = ["foo"]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    data = ['foo']
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -409,12 +307,9 @@ def test_array_is_invalid(db_conn):
         
 def test_empty_array_is_invalid(db_conn):
     data = []
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {}
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -428,12 +323,9 @@ def test_empty_array_is_invalid(db_conn):
         
 def test_number_is_invalid(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -447,12 +339,9 @@ def test_number_is_invalid(db_conn):
         
 def test_string_is_invalid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -465,13 +354,10 @@ def test_string_is_invalid(db_conn):
     assert result is False, "forbideverythingwithbooleanschematrue"
         
 def test_boolean_true_is_invalid(db_conn):
-    data = true
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    data = True
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -485,12 +371,9 @@ def test_boolean_true_is_invalid(db_conn):
         
 def test_boolean_false_is_invalid(db_conn):
     data = false
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -504,12 +387,9 @@ def test_boolean_false_is_invalid(db_conn):
         
 def test_null_is_invalid(db_conn):
     data = null
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -522,13 +402,10 @@ def test_null_is_invalid(db_conn):
     assert result is False, "forbideverythingwithbooleanschematrue"
         
 def test_object_is_invalid(db_conn):
-    data = {"foo": "bar"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    data = {'foo': 'bar'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -542,12 +419,9 @@ def test_object_is_invalid(db_conn):
         
 def test_empty_object_is_invalid(db_conn):
     data = {}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -560,13 +434,10 @@ def test_empty_object_is_invalid(db_conn):
     assert result is False, "forbideverythingwithbooleanschematrue"
         
 def test_array_is_invalid(db_conn):
-    data = ["foo"]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    data = ['foo']
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -580,12 +451,9 @@ def test_array_is_invalid(db_conn):
         
 def test_empty_array_is_invalid(db_conn):
     data = []
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": true
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -599,12 +467,9 @@ def test_empty_array_is_invalid(db_conn):
         
 def test_number_is_valid(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -618,12 +483,9 @@ def test_number_is_valid(db_conn):
         
 def test_string_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -636,13 +498,10 @@ def test_string_is_valid(db_conn):
     assert result is True, "alloweverythingwithbooleanschemafalse"
         
 def test_boolean_true_is_valid(db_conn):
-    data = true
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    data = True
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -656,12 +515,9 @@ def test_boolean_true_is_valid(db_conn):
         
 def test_boolean_false_is_valid(db_conn):
     data = false
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -675,12 +531,9 @@ def test_boolean_false_is_valid(db_conn):
         
 def test_null_is_valid(db_conn):
     data = null
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -693,13 +546,10 @@ def test_null_is_valid(db_conn):
     assert result is True, "alloweverythingwithbooleanschemafalse"
         
 def test_object_is_valid(db_conn):
-    data = {"foo": "bar"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    data = {'foo': 'bar'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -713,12 +563,9 @@ def test_object_is_valid(db_conn):
         
 def test_empty_object_is_valid(db_conn):
     data = {}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -731,13 +578,10 @@ def test_empty_object_is_valid(db_conn):
     assert result is True, "alloweverythingwithbooleanschemafalse"
         
 def test_array_is_valid(db_conn):
-    data = ["foo"]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    data = ['foo']
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -751,12 +595,9 @@ def test_array_is_valid(db_conn):
         
 def test_empty_array_is_valid(db_conn):
     data = []
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": false
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -770,14 +611,9 @@ def test_empty_array_is_valid(db_conn):
         
 def test_any_value_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "not": {}
-    }
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'not': {}}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -790,24 +626,10 @@ def test_any_value_is_valid(db_conn):
     assert result is True, "doublenegation"
         
 def test_unevaluated_property(db_conn):
-    data = {"bar": 1}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "$comment": "this subschema must still produce annotations internally, even though the 'not' will ultimately discard them",
-        "anyOf": [
-            true,
-            {
-                "properties": {
-                    "foo": true
-                }
-            }
-        ],
-        "unevaluatedProperties": false
-    }
-}
+    data = {'bar': 1}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'$comment': "this subschema must still produce annotations internally, even though the 'not' will ultimately discard them", 'anyOf': [True, {'properties': {'foo': True}}], 'unevaluatedProperties': False}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -820,24 +642,10 @@ def test_unevaluated_property(db_conn):
     assert result is True, "collectannotationsinsideanotevenifcollectionisdisabled"
         
 def test_annotations_are_still_collected_inside_a_not(db_conn):
-    data = {"foo": 1}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "not": {
-        "$comment": "this subschema must still produce annotations internally, even though the 'not' will ultimately discard them",
-        "anyOf": [
-            true,
-            {
-                "properties": {
-                    "foo": true
-                }
-            }
-        ],
-        "unevaluatedProperties": false
-    }
-}
+    data = {'foo': 1}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {'$comment': "this subschema must still produce annotations internally, even though the 'not' will ultimately discard them", 'anyOf': [True, {'properties': {'foo': True}}], 'unevaluatedProperties': False}}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

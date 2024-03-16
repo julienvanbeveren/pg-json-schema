@@ -18,20 +18,10 @@ def db_conn():
 
 
 def test_correct_types(db_conn):
-    data = [1, "foo"]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "integer"
-        },
-        {
-            "type": "string"
-        }
-    ]
-}
+    data = [1, 'foo']
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'integer'}, {'type': 'string'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -44,20 +34,10 @@ def test_correct_types(db_conn):
     assert result is True, "aschemagivenforprefixItems"
         
 def test_wrong_types(db_conn):
-    data = ["foo", 1]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "integer"
-        },
-        {
-            "type": "string"
-        }
-    ]
-}
+    data = ['foo', 1]
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'integer'}, {'type': 'string'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -71,19 +51,9 @@ def test_wrong_types(db_conn):
         
 def test_incomplete_array_of_items(db_conn):
     data = [1]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "integer"
-        },
-        {
-            "type": "string"
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'integer'}, {'type': 'string'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -96,20 +66,10 @@ def test_incomplete_array_of_items(db_conn):
     assert result is True, "aschemagivenforprefixItems"
         
 def test_array_with_additional_items(db_conn):
-    data = [1, "foo", true]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "integer"
-        },
-        {
-            "type": "string"
-        }
-    ]
-}
+    data = [1, 'foo', True]
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'integer'}, {'type': 'string'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -123,19 +83,9 @@ def test_array_with_additional_items(db_conn):
         
 def test_empty_array(db_conn):
     data = []
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "integer"
-        },
-        {
-            "type": "string"
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'integer'}, {'type': 'string'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -148,20 +98,10 @@ def test_empty_array(db_conn):
     assert result is True, "aschemagivenforprefixItems"
         
 def test_JavaScript_pseudoarray_is_valid(db_conn):
-    data = {"0": "invalid", "1": "valid", "length": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "integer"
-        },
-        {
-            "type": "string"
-        }
-    ]
-}
+    data = {'0': 'invalid', '1': 'valid', 'length': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'integer'}, {'type': 'string'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -175,15 +115,9 @@ def test_JavaScript_pseudoarray_is_valid(db_conn):
         
 def test_array_with_one_item_is_valid(db_conn):
     data = [1]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        true,
-        false
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [True, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -196,16 +130,10 @@ def test_array_with_one_item_is_valid(db_conn):
     assert result is True, "prefixItemswithbooleanschemas"
         
 def test_array_with_two_items_is_invalid(db_conn):
-    data = [1, "foo"]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        true,
-        false
-    ]
-}
+    data = [1, 'foo']
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [True, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -219,15 +147,9 @@ def test_array_with_two_items_is_invalid(db_conn):
         
 def test_empty_array_is_valid(db_conn):
     data = []
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        true,
-        false
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [True, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -240,17 +162,10 @@ def test_empty_array_is_valid(db_conn):
     assert result is True, "prefixItemswithbooleanschemas"
         
 def test_only_the_first_item_is_validated(db_conn):
-    data = [1, "foo", false]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "integer"
-        }
-    ]
-}
+    data = [1, 'foo', False]
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'integer'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -263,17 +178,10 @@ def test_only_the_first_item_is_validated(db_conn):
     assert result is True, "additionalitemsareallowedbydefault"
         
 def test_allows_null_elements(db_conn):
-    data = [null]
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "prefixItems": [
-        {
-            "type": "null"
-        }
-    ]
-}
+    data = [None]
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'prefixItems': [{'type': 'null'}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

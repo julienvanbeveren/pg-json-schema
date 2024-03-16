@@ -19,19 +19,9 @@ def db_conn():
 
 def test_first_oneOf_valid(db_conn):
     data = 1
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -45,19 +35,9 @@ def test_first_oneOf_valid(db_conn):
         
 def test_second_oneOf_valid(db_conn):
     data = 2.5
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -71,19 +51,9 @@ def test_second_oneOf_valid(db_conn):
         
 def test_both_oneOf_valid(db_conn):
     data = 3
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -97,19 +67,9 @@ def test_both_oneOf_valid(db_conn):
         
 def test_neither_oneOf_valid(db_conn):
     data = 1.5
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "type": "integer"
-        },
-        {
-            "minimum": 2
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'type': 'integer'}, {'minimum': 2}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -123,20 +83,9 @@ def test_neither_oneOf_valid(db_conn):
         
 def test_mismatch_base_schema(db_conn):
     data = 3
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "string",
-    "oneOf": [
-        {
-            "minLength": 2
-        },
-        {
-            "maxLength": 4
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'string', 'oneOf': [{'minLength': 2}, {'maxLength': 4}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -150,20 +99,9 @@ def test_mismatch_base_schema(db_conn):
         
 def test_one_oneOf_valid(db_conn):
     data = 'foobar'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "string",
-    "oneOf": [
-        {
-            "minLength": 2
-        },
-        {
-            "maxLength": 4
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'string', 'oneOf': [{'minLength': 2}, {'maxLength': 4}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -177,20 +115,9 @@ def test_one_oneOf_valid(db_conn):
         
 def test_both_oneOf_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "string",
-    "oneOf": [
-        {
-            "minLength": 2
-        },
-        {
-            "maxLength": 4
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'string', 'oneOf': [{'minLength': 2}, {'maxLength': 4}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -204,16 +131,9 @@ def test_both_oneOf_valid(db_conn):
         
 def test_any_value_is_invalid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        true,
-        true,
-        true
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [True, True, True]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -227,16 +147,9 @@ def test_any_value_is_invalid(db_conn):
         
 def test_any_value_is_valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        true,
-        false,
-        false
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [True, False, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -250,16 +163,9 @@ def test_any_value_is_valid(db_conn):
         
 def test_any_value_is_invalid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        true,
-        true,
-        false
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [True, True, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -273,16 +179,9 @@ def test_any_value_is_invalid(db_conn):
         
 def test_any_value_is_invalid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        false,
-        false,
-        false
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [False, False, False]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -295,34 +194,10 @@ def test_any_value_is_invalid(db_conn):
     assert result is False, "oneOfwithbooleanschemasallfalse"
         
 def test_first_oneOf_valid_complex(db_conn):
-    data = {"bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -335,34 +210,10 @@ def test_first_oneOf_valid_complex(db_conn):
     assert result is True, "oneOfcomplextypes"
         
 def test_second_oneOf_valid_complex(db_conn):
-    data = {"foo": "baz"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 'baz'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -375,34 +226,10 @@ def test_second_oneOf_valid_complex(db_conn):
     assert result is True, "oneOfcomplextypes"
         
 def test_both_oneOf_valid_complex(db_conn):
-    data = {"foo": "baz", "bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 'baz', 'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -415,34 +242,10 @@ def test_both_oneOf_valid_complex(db_conn):
     assert result is False, "oneOfcomplextypes"
         
 def test_neither_oneOf_valid_complex(db_conn):
-    data = {"foo": 2, "bar": "quux"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 2, 'bar': 'quux'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': {'type': 'integer'}}, 'required': ['bar']}, {'properties': {'foo': {'type': 'string'}}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -456,17 +259,9 @@ def test_neither_oneOf_valid_complex(db_conn):
         
 def test_one_valid__valid(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "type": "number"
-        },
-        {}
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'type': 'number'}, {}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -480,17 +275,9 @@ def test_one_valid__valid(db_conn):
         
 def test_both_valid__invalid(db_conn):
     data = 123
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "type": "number"
-        },
-        {}
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'type': 'number'}, {}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -503,27 +290,10 @@ def test_both_valid__invalid(db_conn):
     assert result is False, "oneOfwithemptyschema"
         
 def test_both_invalid__invalid(db_conn):
-    data = {"bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "oneOf": [
-        {
-            "required": [
-                "foo",
-                "bar"
-            ]
-        },
-        {
-            "required": [
-                "foo",
-                "baz"
-            ]
-        }
-    ]
-}
+    data = {'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'object', 'oneOf': [{'required': ['foo', 'bar']}, {'required': ['foo', 'baz']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -536,27 +306,10 @@ def test_both_invalid__invalid(db_conn):
     assert result is False, "oneOfwithrequired"
         
 def test_first_valid__valid(db_conn):
-    data = {"foo": 1, "bar": 2}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "oneOf": [
-        {
-            "required": [
-                "foo",
-                "bar"
-            ]
-        },
-        {
-            "required": [
-                "foo",
-                "baz"
-            ]
-        }
-    ]
-}
+    data = {'foo': 1, 'bar': 2}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'object', 'oneOf': [{'required': ['foo', 'bar']}, {'required': ['foo', 'baz']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -569,27 +322,10 @@ def test_first_valid__valid(db_conn):
     assert result is True, "oneOfwithrequired"
         
 def test_second_valid__valid(db_conn):
-    data = {"foo": 1, "baz": 3}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "oneOf": [
-        {
-            "required": [
-                "foo",
-                "bar"
-            ]
-        },
-        {
-            "required": [
-                "foo",
-                "baz"
-            ]
-        }
-    ]
-}
+    data = {'foo': 1, 'baz': 3}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'object', 'oneOf': [{'required': ['foo', 'bar']}, {'required': ['foo', 'baz']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -602,27 +338,10 @@ def test_second_valid__valid(db_conn):
     assert result is True, "oneOfwithrequired"
         
 def test_both_valid__invalid(db_conn):
-    data = {"foo": 1, "bar": 2, "baz": 3}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "object",
-    "oneOf": [
-        {
-            "required": [
-                "foo",
-                "bar"
-            ]
-        },
-        {
-            "required": [
-                "foo",
-                "baz"
-            ]
-        }
-    ]
-}
+    data = {'foo': 1, 'bar': 2, 'baz': 3}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'object', 'oneOf': [{'required': ['foo', 'bar']}, {'required': ['foo', 'baz']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -635,31 +354,10 @@ def test_both_valid__invalid(db_conn):
     assert result is False, "oneOfwithrequired"
         
 def test_first_oneOf_valid(db_conn):
-    data = {"bar": 8}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": true,
-                "baz": true
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": true
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'bar': 8}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': True, 'baz': True}, 'required': ['bar']}, {'properties': {'foo': True}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -672,31 +370,10 @@ def test_first_oneOf_valid(db_conn):
     assert result is True, "oneOfwithmissingoptionalproperty"
         
 def test_second_oneOf_valid(db_conn):
-    data = {"foo": "foo"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": true,
-                "baz": true
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": true
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 'foo'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': True, 'baz': True}, 'required': ['bar']}, {'properties': {'foo': True}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -709,31 +386,10 @@ def test_second_oneOf_valid(db_conn):
     assert result is True, "oneOfwithmissingoptionalproperty"
         
 def test_both_oneOf_valid(db_conn):
-    data = {"foo": "foo", "bar": 8}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": true,
-                "baz": true
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": true
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'foo': 'foo', 'bar': 8}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': True, 'baz': True}, 'required': ['bar']}, {'properties': {'foo': True}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -746,31 +402,10 @@ def test_both_oneOf_valid(db_conn):
     assert result is False, "oneOfwithmissingoptionalproperty"
         
 def test_neither_oneOf_valid(db_conn):
-    data = {"baz": "quux"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "properties": {
-                "bar": true,
-                "baz": true
-            },
-            "required": [
-                "bar"
-            ]
-        },
-        {
-            "properties": {
-                "foo": true
-            },
-            "required": [
-                "foo"
-            ]
-        }
-    ]
-}
+    data = {'baz': 'quux'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'properties': {'bar': True, 'baz': True}, 'required': ['bar']}, {'properties': {'foo': True}, 'required': ['foo']}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -784,20 +419,9 @@ def test_neither_oneOf_valid(db_conn):
         
 def test_null_is_valid(db_conn):
     data = null
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "oneOf": [
-                {
-                    "type": "null"
-                }
-            ]
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'oneOf': [{'type': 'null'}]}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -811,20 +435,9 @@ def test_null_is_valid(db_conn):
         
 def test_anything_nonnull_is_invalid(db_conn):
     data = 123
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "oneOf": [
-        {
-            "oneOf": [
-                {
-                    "type": "null"
-                }
-            ]
-        }
-    ]
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'oneOf': [{'type': 'null'}]}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

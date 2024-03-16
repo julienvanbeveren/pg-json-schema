@@ -19,12 +19,9 @@ def db_conn():
 
 def test_int_by_int(db_conn):
     data = 10
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -38,12 +35,9 @@ def test_int_by_int(db_conn):
         
 def test_int_by_int_fail(db_conn):
     data = 7
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -57,12 +51,9 @@ def test_int_by_int_fail(db_conn):
         
 def test_ignores_nonnumbers(db_conn):
     data = 'foo'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 2
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 2}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -76,12 +67,9 @@ def test_ignores_nonnumbers(db_conn):
         
 def test_zero_is_multiple_of_anything(db_conn):
     data = 0
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 1.5
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 1.5}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -95,12 +83,9 @@ def test_zero_is_multiple_of_anything(db_conn):
         
 def test_45_is_multiple_of_15(db_conn):
     data = 4.5
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 1.5
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 1.5}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -114,12 +99,9 @@ def test_45_is_multiple_of_15(db_conn):
         
 def test_35_is_not_multiple_of_15(db_conn):
     data = 35
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 1.5
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 1.5}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -133,12 +115,9 @@ def test_35_is_not_multiple_of_15(db_conn):
         
 def test_00075_is_multiple_of_00001(db_conn):
     data = 0.0075
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 0.0001
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 0.0001}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -152,12 +131,9 @@ def test_00075_is_multiple_of_00001(db_conn):
         
 def test_000751_is_not_multiple_of_00001(db_conn):
     data = 0.00751
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "multipleOf": 0.0001
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'multipleOf': 0.0001}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -171,13 +147,9 @@ def test_000751_is_not_multiple_of_00001(db_conn):
         
 def test_always_invalid_but_naive_implementations_may_raise_an_overflow_error(db_conn):
     data = 1e+308
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "integer",
-    "multipleOf": 0.123456789
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'integer', 'multipleOf': 0.123456789}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -191,13 +163,9 @@ def test_always_invalid_but_naive_implementations_may_raise_an_overflow_error(db
         
 def test_any_integer_is_a_multiple_of_1e8(db_conn):
     data = 12391239123
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "type": "integer",
-    "multipleOf": 1e-08
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'integer', 'multipleOf': 1e-08}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

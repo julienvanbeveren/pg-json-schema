@@ -19,9 +19,9 @@ def db_conn():
 
 def test_number_is_valid(db_conn):
     data = 1
-    schema = true
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -35,9 +35,9 @@ def test_number_is_valid(db_conn):
         
 def test_string_is_valid(db_conn):
     data = 'foo'
-    schema = true
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -50,10 +50,10 @@ def test_string_is_valid(db_conn):
     assert result is True, "booleanschematrue"
         
 def test_boolean_true_is_valid(db_conn):
-    data = true
-    schema = true
+    data = True
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -67,9 +67,9 @@ def test_boolean_true_is_valid(db_conn):
         
 def test_boolean_false_is_valid(db_conn):
     data = false
-    schema = true
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -83,9 +83,9 @@ def test_boolean_false_is_valid(db_conn):
         
 def test_null_is_valid(db_conn):
     data = null
-    schema = true
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -98,10 +98,10 @@ def test_null_is_valid(db_conn):
     assert result is True, "booleanschematrue"
         
 def test_object_is_valid(db_conn):
-    data = {"foo": "bar"}
-    schema = true
+    data = {'foo': 'bar'}
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -115,9 +115,9 @@ def test_object_is_valid(db_conn):
         
 def test_empty_object_is_valid(db_conn):
     data = {}
-    schema = true
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -130,10 +130,10 @@ def test_empty_object_is_valid(db_conn):
     assert result is True, "booleanschematrue"
         
 def test_array_is_valid(db_conn):
-    data = ["foo"]
-    schema = true
+    data = ['foo']
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -147,9 +147,9 @@ def test_array_is_valid(db_conn):
         
 def test_empty_array_is_valid(db_conn):
     data = []
-    schema = true
+    schema = True
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -163,9 +163,9 @@ def test_empty_array_is_valid(db_conn):
         
 def test_number_is_invalid(db_conn):
     data = 1
-    schema = false
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -179,9 +179,9 @@ def test_number_is_invalid(db_conn):
         
 def test_string_is_invalid(db_conn):
     data = 'foo'
-    schema = false
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -194,10 +194,10 @@ def test_string_is_invalid(db_conn):
     assert result is False, "booleanschemafalse"
         
 def test_boolean_true_is_invalid(db_conn):
-    data = true
-    schema = false
+    data = True
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -211,9 +211,9 @@ def test_boolean_true_is_invalid(db_conn):
         
 def test_boolean_false_is_invalid(db_conn):
     data = false
-    schema = false
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -227,9 +227,9 @@ def test_boolean_false_is_invalid(db_conn):
         
 def test_null_is_invalid(db_conn):
     data = null
-    schema = false
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -242,10 +242,10 @@ def test_null_is_invalid(db_conn):
     assert result is False, "booleanschemafalse"
         
 def test_object_is_invalid(db_conn):
-    data = {"foo": "bar"}
-    schema = false
+    data = {'foo': 'bar'}
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -259,9 +259,9 @@ def test_object_is_invalid(db_conn):
         
 def test_empty_object_is_invalid(db_conn):
     data = {}
-    schema = false
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -274,10 +274,10 @@ def test_empty_object_is_invalid(db_conn):
     assert result is False, "booleanschemafalse"
         
 def test_array_is_invalid(db_conn):
-    data = ["foo"]
-    schema = false
+    data = ['foo']
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -291,9 +291,9 @@ def test_array_is_invalid(db_conn):
         
 def test_empty_array_is_invalid(db_conn):
     data = []
-    schema = false
+    schema = False
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

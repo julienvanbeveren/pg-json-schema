@@ -18,31 +18,10 @@ def db_conn():
 
 
 def test_passing_case(db_conn):
-    data = {"foo": 1}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$defs": {
-        "int": {
-            "type": "integer"
-        }
-    },
-    "allOf": [
-        {
-            "properties": {
-                "foo": {
-                    "$ref": "#/$defs/int"
-                }
-            }
-        },
-        {
-            "additionalProperties": {
-                "$ref": "#/$defs/int"
-            }
-        }
-    ]
-}
+    data = {'foo': 1}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', '$defs': {'int': {'type': 'integer'}}, 'allOf': [{'properties': {'foo': {'$ref': '#/$defs/int'}}}, {'additionalProperties': {'$ref': '#/$defs/int'}}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -55,31 +34,10 @@ def test_passing_case(db_conn):
     assert result is True, "evaluatingthesameschemalocationagainstthesamedatalocationtwiceisnotasignofaninfiniteloop"
         
 def test_failing_case(db_conn):
-    data = {"foo": "a string"}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$defs": {
-        "int": {
-            "type": "integer"
-        }
-    },
-    "allOf": [
-        {
-            "properties": {
-                "foo": {
-                    "$ref": "#/$defs/int"
-                }
-            }
-        },
-        {
-            "additionalProperties": {
-                "$ref": "#/$defs/int"
-            }
-        }
-    ]
-}
+    data = {'foo': 'a string'}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', '$defs': {'int': {'type': 'integer'}}, 'allOf': [{'properties': {'foo': {'$ref': '#/$defs/int'}}}, {'additionalProperties': {'$ref': '#/$defs/int'}}]}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

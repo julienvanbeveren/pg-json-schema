@@ -19,12 +19,9 @@ def db_conn():
 
 def test_a_matching_pattern_is_valid(db_conn):
     data = 'aaa'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -38,12 +35,9 @@ def test_a_matching_pattern_is_valid(db_conn):
         
 def test_a_nonmatching_pattern_is_invalid(db_conn):
     data = 'abc'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -56,13 +50,10 @@ def test_a_nonmatching_pattern_is_invalid(db_conn):
     assert result is False, "patternvalidation"
         
 def test_ignores_booleans(db_conn):
-    data = true
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    data = True
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -76,12 +67,9 @@ def test_ignores_booleans(db_conn):
         
 def test_ignores_integers(db_conn):
     data = 123
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -95,12 +83,9 @@ def test_ignores_integers(db_conn):
         
 def test_ignores_floats(db_conn):
     data = 1.0
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -114,12 +99,9 @@ def test_ignores_floats(db_conn):
         
 def test_ignores_objects(db_conn):
     data = {}
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -133,12 +115,9 @@ def test_ignores_objects(db_conn):
         
 def test_ignores_arrays(db_conn):
     data = []
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -152,12 +131,9 @@ def test_ignores_arrays(db_conn):
         
 def test_ignores_null(db_conn):
     data = null
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "^a*$"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:
@@ -171,12 +147,9 @@ def test_ignores_null(db_conn):
         
 def test_matches_a_substring(db_conn):
     data = 'xxaayy'
-    schema = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "pattern": "a+"
-}
+    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': 'a+'}
 
-    data_str = json.dumps(data) if not isinstance(data, str) else data
+    data_str = json.dumps(data)
     schema_str = json.dumps(schema)
 
     with db_conn.cursor() as cur:

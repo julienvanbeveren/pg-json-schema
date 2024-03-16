@@ -1,5 +1,7 @@
 CREATE OR REPLACE FUNCTION validate_schema(data jsonb, schema jsonb)
 RETURNS BOOLEAN AS $$
+DECLARE
+  path TEXT[] DEFAULT '{}';
 BEGIN
 
   -- null validation

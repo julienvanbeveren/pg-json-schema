@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
@@ -43,3 +42,9 @@ jobs:
       env:
         DATABASE_URL: postgres://postgres:admin@localhost:5432/db
       run: make test
+
+    - name: Generate and upload CI badges
+      uses: gaelgirodon/ci-badges-action@v1
+      with:
+        gist-id: 070e58d1fbee37dab44796ed36c141bc
+        token: ${{ secrets.GIST_TOKEN }}

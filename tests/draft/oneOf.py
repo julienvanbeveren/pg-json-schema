@@ -420,7 +420,7 @@ def test_neither_oneOf_valid(db_conn):
     assert result is False, "oneOfwithmissingoptionalproperty"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'oneOf': [{'oneOf': [{'type': 'null'}]}]}
 
     data_str = json.dumps(data)

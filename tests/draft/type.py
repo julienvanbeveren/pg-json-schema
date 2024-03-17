@@ -148,7 +148,7 @@ def test_a_boolean_is_not_an_integer(db_conn):
     assert result is False, "integertypematchesintegers"
         
 def test_null_is_not_an_integer(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'integer'}
 
     data_str = json.dumps(data)
@@ -292,7 +292,7 @@ def test_a_boolean_is_not_a_number(db_conn):
     assert result is False, "numbertypematchesnumbers"
         
 def test_null_is_not_a_number(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'number'}
 
     data_str = json.dumps(data)
@@ -436,7 +436,7 @@ def test_a_boolean_is_not_a_string(db_conn):
     assert result is False, "stringtypematchesstrings"
         
 def test_null_is_not_a_string(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'string'}
 
     data_str = json.dumps(data)
@@ -548,7 +548,7 @@ def test_a_boolean_is_not_an_object(db_conn):
     assert result is False, "objecttypematchesobjects"
         
 def test_null_is_not_an_object(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'object'}
 
     data_str = json.dumps(data)
@@ -660,7 +660,7 @@ def test_a_boolean_is_not_an_array(db_conn):
     assert result is False, "arraytypematchesarrays"
         
 def test_null_is_not_an_array(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'array'}
 
     data_str = json.dumps(data)
@@ -804,7 +804,7 @@ def test_true_is_a_boolean(db_conn):
     assert result is True, "booleantypematchesbooleans"
         
 def test_false_is_a_boolean(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'boolean'}
 
     data_str = json.dumps(data)
@@ -820,7 +820,7 @@ def test_false_is_a_boolean(db_conn):
     assert result is True, "booleantypematchesbooleans"
         
 def test_null_is_not_a_boolean(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'boolean'}
 
     data_str = json.dumps(data)
@@ -964,7 +964,7 @@ def test_true_is_not_null(db_conn):
     assert result is False, "nulltypematchesonlythenullobject"
         
 def test_false_is_not_null(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'null'}
 
     data_str = json.dumps(data)
@@ -980,7 +980,7 @@ def test_false_is_not_null(db_conn):
     assert result is False, "nulltypematchesonlythenullobject"
         
 def test_null_is_null(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': 'null'}
 
     data_str = json.dumps(data)
@@ -1092,7 +1092,7 @@ def test_a_boolean_is_invalid(db_conn):
     assert result is False, "multipletypescanbespecifiedinanarray"
         
 def test_null_is_invalid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': ['integer', 'string']}
 
     data_str = json.dumps(data)
@@ -1204,7 +1204,7 @@ def test_string_is_invalid(db_conn):
     assert result is False, "typearrayorobject"
         
 def test_null_is_invalid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': ['array', 'object']}
 
     data_str = json.dumps(data)
@@ -1252,7 +1252,7 @@ def test_object_is_valid(db_conn):
     assert result is True, "typearrayobjectornull"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'type': ['array', 'object', 'null']}
 
     data_str = json.dumps(data)

@@ -276,7 +276,7 @@ def test_number_is_valid(db_conn):
     assert result is True, "anyOfwithoneemptyschema"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'anyOf': [{'anyOf': [{'type': 'null'}]}]}
 
     data_str = json.dumps(data)

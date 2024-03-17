@@ -180,7 +180,7 @@ def test_array_with_additional_items_is_invalid(db_conn):
     assert result is False, "constwitharray"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'const': None}
 
     data_str = json.dumps(data)
@@ -212,7 +212,7 @@ def test_not_null_is_invalid(db_conn):
     assert result is False, "constwithnull"
         
 def test_false_is_valid(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'const': False}
 
     data_str = json.dumps(data)
@@ -500,7 +500,7 @@ def test_a_10_is_invalid(db_conn):
     assert result is False, "constwithatruedoesnotmatcha1"
         
 def test_false_is_invalid(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'const': 0}
 
     data_str = json.dumps(data)

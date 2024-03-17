@@ -48,7 +48,12 @@ def db_conn():
 
                 # Prepare the data for insertion
                 if isinstance(test["data"], str):
-                    data_repr = f"'{test['data']}'"  # Preserve it as a Python string
+                    data_repr = f"'{test['data']}'"
+                elif isinstance(test["data"], bool):
+                    data_repr = "True" if test['data'] else "False"
+                elif test["data"] is None:
+                    data_repr = "None"
+
                 else:
                     data_repr = test["data"] or json.dumps(test["data"])  # Convert other types to JSON string
 

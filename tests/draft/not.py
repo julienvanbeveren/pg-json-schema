@@ -228,7 +228,7 @@ def test_boolean_true_is_invalid(db_conn):
     assert result is False, "forbideverythingwithemptyschema"
         
 def test_boolean_false_is_invalid(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
     data_str = json.dumps(data)
@@ -244,7 +244,7 @@ def test_boolean_false_is_invalid(db_conn):
     assert result is False, "forbideverythingwithemptyschema"
         
 def test_null_is_invalid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': {}}
 
     data_str = json.dumps(data)
@@ -372,7 +372,7 @@ def test_boolean_true_is_invalid(db_conn):
     assert result is False, "forbideverythingwithbooleanschematrue"
         
 def test_boolean_false_is_invalid(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
     data_str = json.dumps(data)
@@ -388,7 +388,7 @@ def test_boolean_false_is_invalid(db_conn):
     assert result is False, "forbideverythingwithbooleanschematrue"
         
 def test_null_is_invalid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': True}
 
     data_str = json.dumps(data)
@@ -516,7 +516,7 @@ def test_boolean_true_is_valid(db_conn):
     assert result is True, "alloweverythingwithbooleanschemafalse"
         
 def test_boolean_false_is_valid(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
     data_str = json.dumps(data)
@@ -532,7 +532,7 @@ def test_boolean_false_is_valid(db_conn):
     assert result is True, "alloweverythingwithbooleanschemafalse"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'not': False}
 
     data_str = json.dumps(data)

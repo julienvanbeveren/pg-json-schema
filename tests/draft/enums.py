@@ -68,7 +68,7 @@ def test_one_of_the_enum_is_valid(db_conn):
     assert result is True, "heterogeneousenumvalidation"
         
 def test_something_else_is_invalid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'enum': [6, 'foo', [], True, {'foo': 12}]}
 
     data_str = json.dumps(data)
@@ -132,7 +132,7 @@ def test_extra_properties_in_object_is_invalid(db_conn):
     assert result is False, "heterogeneousenumvalidation"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'enum': [6, None]}
 
     data_str = json.dumps(data)
@@ -324,7 +324,7 @@ def test_another_string_is_invalid(db_conn):
     assert result is False, "enumwithescapedcharacters"
         
 def test_false_is_valid(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'enum': [False]}
 
     data_str = json.dumps(data)
@@ -516,7 +516,7 @@ def test_10_is_invalid(db_conn):
     assert result is False, "enumwithtruedoesnotmatch1"
         
 def test_false_is_invalid(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'enum': [0]}
 
     data_str = json.dumps(data)

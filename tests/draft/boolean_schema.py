@@ -68,7 +68,7 @@ def test_boolean_true_is_valid(db_conn):
     assert result is True, "booleanschematrue"
         
 def test_boolean_false_is_valid(db_conn):
-    data = false
+    data = False
     schema = True
 
     data_str = json.dumps(data)
@@ -84,7 +84,7 @@ def test_boolean_false_is_valid(db_conn):
     assert result is True, "booleanschematrue"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = True
 
     data_str = json.dumps(data)
@@ -212,7 +212,7 @@ def test_boolean_true_is_invalid(db_conn):
     assert result is False, "booleanschemafalse"
         
 def test_boolean_false_is_invalid(db_conn):
-    data = false
+    data = False
     schema = False
 
     data_str = json.dumps(data)
@@ -228,7 +228,7 @@ def test_boolean_false_is_invalid(db_conn):
     assert result is False, "booleanschemafalse"
         
 def test_null_is_invalid(db_conn):
-    data = null
+    data = None
     schema = False
 
     data_str = json.dumps(data)

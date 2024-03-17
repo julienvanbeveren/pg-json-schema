@@ -340,7 +340,7 @@ def test_string_is_invalid(db_conn):
     assert result is False, "allOfwiththelastemptyschema"
         
 def test_null_is_valid(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'allOf': [{'allOf': [{'type': 'null'}]}]}
 
     data_str = json.dumps(data)

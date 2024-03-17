@@ -404,7 +404,7 @@ def test_first_scope_is_not_in_dynamic_scope_for_the_dynamicRef(db_conn):
     assert result is False, "afterleavingadynamicscopeitisnotusedbyadynamicRef"
         
 def test_thendefsthingy_is_the_final_stop_for_the_dynamicRef(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', '$id': 'https://test.json-schema.org/dynamic-ref-leaving-dynamic-scope/main', 'if': {'$id': 'first_scope', '$defs': {'thingy': {'$comment': 'this is first_scope#thingy', '$dynamicAnchor': 'thingy', 'type': 'number'}}}, 'then': {'$id': 'second_scope', '$ref': 'start', '$defs': {'thingy': {'$comment': 'this is second_scope#thingy, the final destination of the $dynamicRef', '$dynamicAnchor': 'thingy', 'type': 'null'}}}, '$defs': {'start': {'$comment': 'this is the landing spot from $ref', '$id': 'start', '$dynamicRef': 'inner_scope#thingy'}, 'thingy': {'$comment': 'this is the first stop for the $dynamicRef', '$id': 'inner_scope', '$dynamicAnchor': 'thingy', 'type': 'string'}}}
 
     data_str = json.dumps(data)

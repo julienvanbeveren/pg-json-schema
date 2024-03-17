@@ -132,7 +132,7 @@ def test_ignores_arrays(db_conn):
     assert result is True, "patternvalidation"
         
 def test_ignores_null(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'pattern': '^a*$'}
 
     data_str = json.dumps(data)

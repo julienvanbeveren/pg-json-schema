@@ -84,7 +84,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "emailformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'email'}
 
     data_str = json.dumps(data)
@@ -100,7 +100,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "emailformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'email'}
 
     data_str = json.dumps(data)
@@ -196,7 +196,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "idnemailformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'idn-email'}
 
     data_str = json.dumps(data)
@@ -212,7 +212,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "idnemailformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'idn-email'}
 
     data_str = json.dumps(data)
@@ -308,7 +308,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "regexformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'regex'}
 
     data_str = json.dumps(data)
@@ -324,7 +324,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "regexformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'regex'}
 
     data_str = json.dumps(data)
@@ -420,7 +420,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "ipv4format"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'ipv4'}
 
     data_str = json.dumps(data)
@@ -436,7 +436,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "ipv4format"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'ipv4'}
 
     data_str = json.dumps(data)
@@ -532,7 +532,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "ipv6format"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'ipv6'}
 
     data_str = json.dumps(data)
@@ -548,7 +548,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "ipv6format"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'ipv6'}
 
     data_str = json.dumps(data)
@@ -644,7 +644,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "idnhostnameformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'idn-hostname'}
 
     data_str = json.dumps(data)
@@ -660,7 +660,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "idnhostnameformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'idn-hostname'}
 
     data_str = json.dumps(data)
@@ -756,7 +756,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "hostnameformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'hostname'}
 
     data_str = json.dumps(data)
@@ -772,7 +772,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "hostnameformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'hostname'}
 
     data_str = json.dumps(data)
@@ -868,7 +868,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "dateformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'date'}
 
     data_str = json.dumps(data)
@@ -884,7 +884,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "dateformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'date'}
 
     data_str = json.dumps(data)
@@ -980,7 +980,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "datetimeformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'date-time'}
 
     data_str = json.dumps(data)
@@ -996,7 +996,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "datetimeformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'date-time'}
 
     data_str = json.dumps(data)
@@ -1092,7 +1092,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "timeformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'time'}
 
     data_str = json.dumps(data)
@@ -1108,7 +1108,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "timeformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'time'}
 
     data_str = json.dumps(data)
@@ -1204,7 +1204,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "jsonpointerformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'json-pointer'}
 
     data_str = json.dumps(data)
@@ -1220,7 +1220,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "jsonpointerformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'json-pointer'}
 
     data_str = json.dumps(data)
@@ -1316,7 +1316,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "relativejsonpointerformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'relative-json-pointer'}
 
     data_str = json.dumps(data)
@@ -1332,7 +1332,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "relativejsonpointerformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'relative-json-pointer'}
 
     data_str = json.dumps(data)
@@ -1428,7 +1428,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "iriformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'iri'}
 
     data_str = json.dumps(data)
@@ -1444,7 +1444,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "iriformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'iri'}
 
     data_str = json.dumps(data)
@@ -1540,7 +1540,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "irireferenceformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'iri-reference'}
 
     data_str = json.dumps(data)
@@ -1556,7 +1556,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "irireferenceformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'iri-reference'}
 
     data_str = json.dumps(data)
@@ -1652,7 +1652,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "uriformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uri'}
 
     data_str = json.dumps(data)
@@ -1668,7 +1668,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "uriformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uri'}
 
     data_str = json.dumps(data)
@@ -1764,7 +1764,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "urireferenceformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uri-reference'}
 
     data_str = json.dumps(data)
@@ -1780,7 +1780,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "urireferenceformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uri-reference'}
 
     data_str = json.dumps(data)
@@ -1876,7 +1876,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "uritemplateformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uri-template'}
 
     data_str = json.dumps(data)
@@ -1892,7 +1892,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "uritemplateformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uri-template'}
 
     data_str = json.dumps(data)
@@ -1988,7 +1988,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "uuidformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uuid'}
 
     data_str = json.dumps(data)
@@ -2004,7 +2004,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "uuidformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'uuid'}
 
     data_str = json.dumps(data)
@@ -2100,7 +2100,7 @@ def test_all_string_formats_ignore_arrays(db_conn):
     assert result is True, "durationformat"
         
 def test_all_string_formats_ignore_booleans(db_conn):
-    data = false
+    data = False
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'duration'}
 
     data_str = json.dumps(data)
@@ -2116,7 +2116,7 @@ def test_all_string_formats_ignore_booleans(db_conn):
     assert result is True, "durationformat"
         
 def test_all_string_formats_ignore_nulls(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'format': 'duration'}
 
     data_str = json.dumps(data)

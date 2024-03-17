@@ -1012,7 +1012,7 @@ def test_ignores_strings(db_conn):
     assert result is True, "nonarrayinstancesarevalid"
         
 def test_ignores_null(db_conn):
-    data = null
+    data = None
     schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'unevaluatedItems': False}
 
     data_str = json.dumps(data)

@@ -9,6 +9,9 @@ DECLARE
 BEGIN
 
   IF schema->>'type' = 'object' THEN
+    IF NOT jsonb_typeof(data) = 'object' THEN
+      RETURN FALSE;
+    END IF;
   END IF;
 
   SELECT array_agg(value) INTO _required
@@ -17,19 +20,18 @@ BEGIN
   FOR _key, _value IN
     SELECT * FROM jsonb_each_text(data->'properties')
   LOOP
-    IF _key = ANY(_required) AND NOT data ? _key THEN
-      RETURN FALSE;
-    END IF;
     IF NOT validate_schema(data->_key, schema->'properties'->_key) THEN
       RETURN FALSE;
     END IF;
   END LOOP;
-  FOREACH _required_item IN ARRAY _required
-  LOOP
-    IF NOT data ? _required_item THEN
-      RETURN FALSE;
-    END IF;
-  END LOOP;
+  IF array_length(_required, 1) > 0 AND jsonb_typeof(data) = 'object' THEN
+    FOREACH _required_item IN ARRAY _required
+    LOOP
+      IF NOT data ? _required_item OR THEN
+        RETURN FALSE;
+      END IF;
+    END LOOP;
+  END IF;
 
   -- null validation
   IF schema->>'type' = 'null' THEN

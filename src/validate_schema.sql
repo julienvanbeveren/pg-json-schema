@@ -18,7 +18,7 @@ BEGIN
   FROM jsonb_array_elements_text((SELECT schema->'required')) AS value;
 
   FOR _key, _value IN
-    SELECT * FROM jsonb_each_text(data->'properties')
+    SELECT * FROM jsonb_each_text(schema->'properties')
   LOOP
     IF NOT validate_schema(data->_key, schema->'properties'->_key) THEN
       RETURN FALSE;

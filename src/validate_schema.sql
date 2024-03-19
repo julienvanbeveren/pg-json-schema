@@ -13,6 +13,20 @@ DECLARE
   _number_value NUMERIC;
 BEGIN
 
+  IF schema->>'enum' IS NOT NULL THEN
+    _boolean_value := FALSE;
+    FOR _jsonb_value IN
+      SELECT jsonb_array_elements(schema->'enum')
+    LOOP
+      IF data = _jsonb_value THEN
+        _boolean_value := TRUE;
+      END IF;
+    END LOOP;
+    IF NOT _boolean_value THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
+
   IF schema->>'type' = 'array' THEN
     IF NOT jsonb_typeof(data) = 'array' THEN
       RETURN FALSE;
@@ -85,6 +99,9 @@ BEGIN
   FOR _key, _value IN
     SELECT * FROM jsonb_each_text(schema->'properties')
   LOOP
+    IF NOT _key = ANY(_required) AND NOT data ? _key THEN
+      CONTINUE;
+    END IF;
     IF NOT validate_schema(data->_key, schema->'properties'->_key) THEN
       RETURN FALSE;
     END IF;

@@ -8,7 +8,32 @@ DECLARE
   _required TEXT[];
   _required_item TEXT;
   _boolean_value BOOLEAN;
+  _number_value NUMERIC;
 BEGIN
+
+  IF schema->>'oneOf' IS NOT NULL THEN
+    _number_value := 0;
+    FOR _jsonb_value IN
+      SELECT jsonb_array_elements(schema->'oneOf')
+    LOOP
+      IF validate_schema(data, _jsonb_value) THEN
+        _number_value := _number_value + 1;
+      END IF;
+    END LOOP;
+    IF NOT _number_value = 1 THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
+
+  IF schema->>'allOf' IS NOT NULL THEN
+    FOR _jsonb_value IN
+      SELECT jsonb_array_elements(schema->'allOf')
+    LOOP
+      IF NOT validate_schema(data, _jsonb_value) THEN
+        RETURN FALSE;
+      END IF;
+    END LOOP;
+  END IF;
 
   IF schema->>'anyOf' IS NOT NULL THEN
     _boolean_value := FALSE;

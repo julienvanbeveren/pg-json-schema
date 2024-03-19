@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION validate_schema(data jsonb, schema jsonb)
+CREATE OR REPLACE FUNCTION validate_schema(data jsonb, schema jsonb, _full_schema jsonb default NULL)
 RETURNS BOOLEAN AS $$
 DECLARE
   path TEXT[] DEFAULT '{}';
@@ -11,7 +11,19 @@ DECLARE
   _required_item TEXT;
   _boolean_value BOOLEAN;
   _number_value NUMERIC;
+  _path TEXT[];
 BEGIN
+
+  IF _full_schema IS NULL THEN
+    _full_schema := schema;
+  END IF;
+
+  IF schema->>'$ref' IS NOT NULL THEN
+    SELECT string_to_array(regexp_replace(schema->>'$ref', '^#/', ''), '/') INTO _path;
+    IF NOT validate_schema(data #> _path, schema, _full_schema) THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
 
   IF schema->>'enum' IS NOT NULL THEN
     _boolean_value := FALSE;
@@ -38,7 +50,7 @@ BEGIN
     FOR _jsonb_value IN
       SELECT jsonb_array_elements(schema->'oneOf')
     LOOP
-      IF validate_schema(data, _jsonb_value) THEN
+      IF validate_schema(data, _jsonb_value, _full_schema) THEN
         _number_value := _number_value + 1;
       END IF;
     END LOOP;
@@ -51,7 +63,7 @@ BEGIN
     FOR _jsonb_value IN
       SELECT jsonb_array_elements(schema->'allOf')
     LOOP
-      IF NOT validate_schema(data, _jsonb_value) THEN
+      IF NOT validate_schema(data, _jsonb_value, _full_schema) THEN
         RETURN FALSE;
       END IF;
     END LOOP;
@@ -62,7 +74,7 @@ BEGIN
     FOR _jsonb_value IN
       SELECT jsonb_array_elements(schema->'anyOf')
     LOOP
-      IF validate_schema(data, _jsonb_value) THEN
+      IF validate_schema(data, _jsonb_value, _full_schema) THEN
         _boolean_value := TRUE;
       END IF;
     END LOOP;
@@ -102,7 +114,7 @@ BEGIN
     IF NOT _key = ANY(_required) AND NOT data ? _key THEN
       CONTINUE;
     END IF;
-    IF NOT validate_schema(data->_key, schema->'properties'->_key) THEN
+    IF NOT validate_schema(data->_key, schema->'properties'->_key, _full_schema) THEN
       RETURN FALSE;
     END IF;
   END LOOP;
@@ -123,7 +135,7 @@ BEGIN
         SELECT * FROM jsonb_each(data)
       LOOP
         IF _key2 ~ _key THEN
-          IF NOT validate_schema(data->_key2, schema->'patternProperties'->_key) THEN
+          IF NOT validate_schema(data->_key2, schema->'patternProperties'->_key, _full_schema) THEN
             RETURN FALSE;
           END IF;
         END IF;
@@ -149,7 +161,7 @@ BEGIN
         IF jsonb_typeof(_jsonb_value) = 'boolean' AND NOT _jsonb_value::BOOLEAN THEN
           RETURN FALSE;
         END IF;
-        IF NOT validate_schema(data->_key, _jsonb_value) THEN
+        IF NOT validate_schema(data->_key, _jsonb_value, _full_schema) THEN
           RETURN FALSE;
         END IF;
       END LOOP outer;
@@ -235,6 +247,12 @@ BEGIN
 
   IF schema->>'exclusiveMaximum' IS NOT NULL AND jsonb_typeof(data) = 'number' THEN
     IF data::NUMERIC >= (schema->>'exclusiveMaximum')::NUMERIC THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
+
+  IF schema->>'not' IS NOT NULL THEN
+    IF validate_schema(data, schema->'not', _full_schema) THEN
       RETURN FALSE;
     END IF;
   END IF;

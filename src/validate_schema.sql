@@ -11,6 +11,12 @@ DECLARE
   _number_value NUMERIC;
 BEGIN
 
+  IF schema->>'type' = 'array' THEN
+    IF NOT jsonb_typeof(data) = 'array' THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
+
   IF schema->>'oneOf' IS NOT NULL THEN
     _number_value := 0;
     FOR _jsonb_value IN

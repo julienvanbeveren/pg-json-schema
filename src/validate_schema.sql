@@ -4,9 +4,25 @@ DECLARE
   path TEXT[] DEFAULT '{}';
   _key TEXT;
   _value TEXT;
+  _jsonb_value JSONB;
   _required TEXT[];
   _required_item TEXT;
+  _boolean_value BOOLEAN;
 BEGIN
+
+  IF schema->>'anyOf' IS NOT NULL THEN
+    _boolean_value := FALSE;
+    FOR _jsonb_value IN
+      SELECT jsonb_array_elements(schema->'anyOf')
+    LOOP
+      IF validate_schema(data, _jsonb_value) THEN
+        _boolean_value := TRUE;
+      END IF;
+    END LOOP;
+    IF _boolean_value = FALSE THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
 
   IF schema ? 'const' THEN
     IF NOT schema->'const' = data THEN

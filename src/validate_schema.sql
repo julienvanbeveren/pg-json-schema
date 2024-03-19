@@ -8,6 +8,12 @@ DECLARE
   _required_item TEXT;
 BEGIN
 
+  IF schema ? 'const' THEN
+    IF NOT schema->'const' = data THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
+
   IF jsonb_typeof(schema) = 'boolean' THEN
     RETURN schema;
   END IF;

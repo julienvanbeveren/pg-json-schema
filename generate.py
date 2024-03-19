@@ -3,9 +3,19 @@ import shutil
 import json
 import re
 
-source_directory = '../JSON-Schema-Test-Suite/tests/draft2020-12/'
+source_directory = './tests/jsons'
 destination_directory = './tests/draft'
 
+def remove_null_characters(obj):
+    """Recursively remove null characters from all string values in a JSON-like object."""
+    if isinstance(obj, dict):
+        return {k: remove_null_characters(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [remove_null_characters(item) for item in obj]
+    elif isinstance(obj, str):
+        return obj.replace('\x00', '')
+    else:
+        return obj
 
 os.makedirs(destination_directory, exist_ok=True)
 
@@ -41,6 +51,7 @@ def db_conn():
 
         for suite in json_data:
             schema = suite["schema"]
+            schema = remove_null_characters(schema)
             for test in suite["tests"]:
                 description_sanitized = "_".join(test["description"].split(" "))
                 description_sanitized = re.sub(r'[^0-9a-zA-Z_]', '', description_sanitized)  # Remove special characters

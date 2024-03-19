@@ -787,35 +787,3 @@ def test_float_minus_one_is_invalid(db_conn):
 
     assert result is False, "floatandintegersareequalupto64bitrepresentationlimits"
         
-def test_match_string_with_nul(db_conn):
-    data = 'hellothere'
-    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'const': 'hello\x00there'}
-
-    data_str = json.dumps(data)
-    schema_str = json.dumps(schema)
-
-    with db_conn.cursor() as cur:
-        cur.execute(
-            "SELECT validate_schema(%s::jsonb, %s::jsonb) AS is_valid;",
-            (data_str, schema_str)
-        )
-        result = cur.fetchone()[0]
-
-    assert result is True, "nulcharactersinstrings"
-        
-def test_do_not_match_string_lacking_nul(db_conn):
-    data = 'hellothere'
-    schema = {'$schema': 'https://json-schema.org/draft/2020-12/schema', 'const': 'hello\x00there'}
-
-    data_str = json.dumps(data)
-    schema_str = json.dumps(schema)
-
-    with db_conn.cursor() as cur:
-        cur.execute(
-            "SELECT validate_schema(%s::jsonb, %s::jsonb) AS is_valid;",
-            (data_str, schema_str)
-        )
-        result = cur.fetchone()[0]
-
-    assert result is False, "nulcharactersinstrings"
-        

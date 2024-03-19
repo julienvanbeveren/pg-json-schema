@@ -8,6 +8,12 @@ DECLARE
   _required_item TEXT;
 BEGIN
 
+  IF schema->>'maxProperties' IS NOT NULL AND jsonb_typeof(data) = 'object' THEN
+    IF (SELECT array_length(array_agg(key), 1) FROM jsonb_object_keys(data::JSONB) as key) > (schema->>'maxProperties')::NUMERIC THEN
+      RETURN FALSE;
+    END IF;
+  END IF;
+
   IF schema->>'type' = 'object' THEN
     IF NOT jsonb_typeof(data) = 'object' THEN
       RETURN FALSE;

@@ -166,6 +166,32 @@ BEGIN
         END IF;
       END LOOP outer;
     END IF;
+
+    _jsonb_value := schema->'unevaluatedProperties';
+    IF _jsonb_value IS NOT NULL THEN
+      <<outer>>
+      FOR _key, _value IN SELECT * FROM jsonb_each_text(data)
+      LOOP
+        IF schema->'properties' ? _key THEN
+          CONTINUE outer;
+        END IF;
+        <<inner>>
+        FOR _key2, _value2 IN
+          SELECT * FROM jsonb_each(schema->'patternProperties')
+        LOOP
+          IF _key ~ _key2 THEN
+            CONTINUE outer;
+          END IF;
+        END LOOP inner;
+        IF jsonb_typeof(_jsonb_value) = 'boolean' AND NOT _jsonb_value::BOOLEAN THEN
+          RETURN FALSE;
+        END IF;
+        IF NOT validate_schema(data->_key, _jsonb_value, _full_schema) THEN
+          RETURN FALSE;
+        END IF;
+      END LOOP outer;
+    END IF;
+
   END IF;
 
   -- null validation

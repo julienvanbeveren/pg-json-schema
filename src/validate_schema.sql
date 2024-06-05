@@ -43,6 +43,11 @@ BEGIN
     IF NOT jsonb_typeof(data) = 'array' THEN
       RETURN FALSE;
     END IF;
+    IF schema ? 'items' THEN
+      IF NOT validate_schema(data, schema->'items', _full_schema) THEN
+        RETURN FALSE;
+      END IF;
+    END IF;
   END IF;
 
   IF schema->>'oneOf' IS NOT NULL THEN
@@ -121,7 +126,7 @@ BEGIN
   IF array_length(_required, 1) > 0 AND jsonb_typeof(data) = 'object' THEN
     FOREACH _required_item IN ARRAY _required
     LOOP
-      IF NOT data ? _required_item OR THEN
+      IF NOT data ? _required_item THEN
         RETURN FALSE;
       END IF;
     END LOOP;
